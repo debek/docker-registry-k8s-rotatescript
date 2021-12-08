@@ -71,6 +71,13 @@ spec:
             httpGet:
               path: /
               port: 5000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "500Mi"
+              cpu: "200m"
           volumeMounts:
             - name: image-store
               mountPath: "/var/lib/registry"
@@ -94,7 +101,7 @@ spec:
     - ReadWriteOnce
   awsElasticBlockStore:
     fsType: xfs
-    volumeID: vol-09a8362db356a84f1
+    volumeID: vol-0909d3ef87b6d785b
   capacity:
     storage: 10Gi
   persistentVolumeReclaimPolicy: Retain
@@ -136,3 +143,25 @@ metadata:
 type: Opaque
 stringData:
   HTTP_SECRET: bXl0ZXN0c2VjcmV0
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: docker-registry
+  name: docker-registry-hpa
+  namespace: docker-registry
+spec:
+  maxReplicas: 8
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 85
+          type: Utilization
+      type: Resource
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: docker-registry

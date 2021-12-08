@@ -67,14 +67,16 @@ module "eks" {
       min_capacity     = 1
 
       instance_type = "t2.medium"
+      asg_max_size  = 4
     }
-        second = {
-          desired_capacity = 1
-          max_capacity     = 4
-          min_capacity     = 1
+    second = {
+      desired_capacity = 1
+      max_capacity     = 4
+      min_capacity     = 1
 
-          instance_type = "t2.medium"
-        }
+      instance_type = "t2.medium"
+      asg_max_size  = 4
+    }
   }
 
   write_kubeconfig   = true
@@ -135,4 +137,10 @@ resource "helm_release" "cert_manager" {
     name  = "installCRDs"
     value = "true"
   }
+}
+
+resource "helm_release" "metrics-server" {
+  name       = "metrics-server"
+  repository = "https://kubernetes-sigs.github.io/metrics-server"
+  chart      = "metrics-server"
 }
