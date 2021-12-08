@@ -10,7 +10,7 @@
 
 ### Usage:
 
-Script which  I wrote is generic and can work with any image name and with every number of tags to keep. Below is info how to use it.
+Script which I wrote is generic and can work with any image name and with every number of tags to keep. Below is info on how to use it.
 
 ```
 usage: retention-script.py [-h] [--image IMAGE] [--count COUNT] [--hostname HOSTNAME] [--user USER] [--password PASSWORD]
@@ -28,11 +28,11 @@ optional arguments:
 
 ### My thoughts on that task:
 
-I learned how use curl requests for changes and test it before. The issue which I had in Deployment.yaml is missing below variable: :)
+I learned how to use curl requests for changes and test them before. The issue which I had in Deployment.yaml is missing below variable: :)
 
 ```
 - name: REGISTRY_STORAGE_DELETE_ENABLED
   value: "true"
 ```
 
-I am considering that for CI/CD or crone maybe we should create different pod with this varaible because on production exposed pod deleting images in that way can be dangerous.
+I am considering that for CI/CD or crone maybe we should create a different pod with this variable because on production exposed pod deleting images in that way can be dangerous.
