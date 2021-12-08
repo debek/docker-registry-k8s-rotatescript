@@ -1,0 +1,57 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronejob-docker-registry
+  namespace: docker-registry
+spec:
+  schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronejob-docker-registry
+              image: registry:2.6.2
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/registry
+                - garbage-collect
+                - /config.yml
+              volumeMounts:
+                - name: image-store
+                  mountPath: /var/lib/registry
+                - name: config-volume
+                  mountPath: /config.yml
+                  subPath: config.yml
+          restartPolicy: OnFailure
+          volumes:
+            - name: image-store
+              persistentVolumeClaim:
+                claimName: pvc
+            - name: config-volume
+              configMap:
+                name: docker-registry-garbage-configfile
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-registry-garbage-configfile
+  namespace: docker-registry
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      fields:
+      service: registrypyenv which python
+    pyenv local project2-tmp
+    storage:
+      cache:
+          blobdescriptor: inmemory
+      filesystem:
+          rootdirectory: /var/lib/registry
+      delete:
+          enabled: true
+      maintenance:
+        readonly:
+          enabled: true

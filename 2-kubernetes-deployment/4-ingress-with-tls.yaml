@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    kubernetes.io/tls-acme: 'true'
+    cert-manager.io/cluster-issuer: "letsencrypt-issuer"
+  name: docker-registry
+  namespace: docker-registry
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - testdd.ml
+    secretName: registry-tls
+  rules:
+  - host: testdd.ml
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: docker-registry
+            port:
+              number: 5000
