@@ -1,6 +1,6 @@
 ## Syntax:
 
-Everywhere I added numbers in names and directories because will be easier to read for someone who will check this code.
+Everywhere I added numbers in files and directories because will be easier to read for someone who will check this code.
 
 ## How it works:
 
@@ -35,3 +35,7 @@ I am really happy because of this task. Before I never prepared private docker-r
 Of course, I meet a few issues during my job like finding correct env variables, API syntax, login authentication, and so on. The funny issue which I had was that when I had one pod then image upload worked but with two pods I had an issue :) I didn't have a secret variable.
 
 To this project we can add also pre-commit, CI/CD file, BETTER AUTOMATION, .gitignore, tf backend in s3 and nice picture of infra. Of course time is needed :)
+
+## Retention registry (Optional Task):
+
+3-retention-registry directory has own README file
