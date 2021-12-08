@@ -6,7 +6,7 @@ The code is tested and works.
 
 ## How it works:
 
-I used terraform for EKS Deployment. Terraform makes also persistent EBS volume, ingress-nginx and cert-manager from the helm.
+I used terraform for EKS Deployment. Terraform makes also persistent EBS volume and ingress-nginx, cert-manager, metrics for hpa from the helm.
 
 After all yaml apply we have connection in that way: DOMIAN -> LB -> INGRESS (SSL cert-manager) -> Service -> Pods
 
