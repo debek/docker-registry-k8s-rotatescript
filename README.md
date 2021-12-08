@@ -1,6 +1,6 @@
 ## Syntax:
 
-Everywhere I added numbers in files and directories because will be easier to read for someone who will check this code.
+Everywhere I added numbers in files and directories name because will be easier to read for someone who will check this code.
 
 The code is tested and works.
 
