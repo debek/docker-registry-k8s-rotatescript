@@ -2,6 +2,8 @@
 
 Everywhere I added numbers in files and directories because will be easier to read for someone who will check this code.
 
+The code is tested and works.
+
 ## How it works:
 
 I used terraform for EKS Deployment. Terraform makes also persistent EBS volume, ingress-nginx and cert-manager from helm.
