@@ -30,12 +30,14 @@ optional arguments:
 
 I learned how to use curl requests for docker-registry and I tested them before I stareted write this code. The issue which I had in Deployment.yaml is missing below variable: :)
 
+curl example:
 ```
 curl -X GET -u test:test -k https://testdd.ml/v2/_catalog
 curl -X GET -u test:test -k https://testdd.ml/v2/cos/tags/list
 curl -s -X DELETE -u test:test  -k https://testdd.ml/v2/cos/manifests/sha256:7b1a6ab2e44dbac178598dabe7cff59bd67233dba0b27e4fbd1f9d4b3c877a54
 ```
 
+variable allowing delete in k8s deployment:
 ```
 - name: REGISTRY_STORAGE_DELETE_ENABLED
   value: "true"
