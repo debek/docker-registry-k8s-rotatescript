@@ -39,8 +39,14 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:3.2.0-alpine
+          image: redis:6.2.6-alpine
           imagePullPolicy: IfNotPresent
+          env:
+            - name: REDIS_PASS
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-access
+                  key: redis-pass
           livenessProbe:
             exec:
               command:
@@ -58,8 +64,8 @@ spec:
           command:
             - "redis-server"
           args:
-            - "--protected-mode"
-            - "no"
+            - "--requirepass"
+            - "$(REDIS_PASS)"
           ports:
             - containerPort: 6379
           resources:
@@ -69,3 +75,12 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "200m"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-access
+  namespace: docker-registry
+data:
+  redis-pass: "test"
+immutable: true

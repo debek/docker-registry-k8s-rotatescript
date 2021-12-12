@@ -14,6 +14,14 @@ spec:
             - name: cronejob-docker-registry
               image: registry:2.6.2
               imagePullPolicy: IfNotPresent
+              env:
+                - name: REGISTRY_REDIS_ADDR
+                  value: "$(REDIS_SERVICE_HOST):$(REDIS_SERVICE_PORT)"
+                - name: REGISTRY_REDIS_PASSWORD
+                  valueFrom:
+                    configMapKeyRef:
+                      name: redis-access
+                      key: redis-pass
               command:
                 - /bin/registry
                 - garbage-collect
@@ -41,13 +49,9 @@ metadata:
 data:
   config.yml: |
     version: 0.1
-    log:
-      fields:
-      service: registrypyenv which python
-    pyenv local project2-tmp
     storage:
       cache:
-          blobdescriptor: inmemory
+          blobdescriptor: redis
       filesystem:
           rootdirectory: /var/lib/registry
       delete:
@@ -55,3 +59,14 @@ data:
       maintenance:
         readonly:
           enabled: true
+    redis:
+    addr: $(REGISTRY_REDIS_ADDR)
+    password: $(REGISTRY_REDIS_PASSWORD)
+    db: 0
+    dialtimeout: 10ms
+    readtimeout: 10ms
+    writetimeout: 10ms
+    pool:
+      maxidle: 16
+      maxactive: 64
+      idletimeout: 300s

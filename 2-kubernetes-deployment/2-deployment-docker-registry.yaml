@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
         - name: docker-registry
-          image: registry:2.6.2
+          image: registry:2.7.1
           imagePullPolicy: IfNotPresent
           env:
             - name: REGISTRY_HTTP_ADDR
@@ -60,6 +60,11 @@ spec:
                 secretKeyRef:
                   name: http-secret
                   key: HTTP_SECRET
+            - name: REGISTRY_REDIS_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-access
+                  key: redis-pass
           ports:
             - name: http
               containerPort: 5000
@@ -101,7 +106,7 @@ spec:
     - ReadWriteOnce
   awsElasticBlockStore:
     fsType: xfs
-    volumeID: vol-0909d3ef87b6d785b
+    volumeID: vol-02524949b67374d2e
   capacity:
     storage: 10Gi
   persistentVolumeReclaimPolicy: Retain

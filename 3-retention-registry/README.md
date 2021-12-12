@@ -28,7 +28,7 @@ optional arguments:
 
 ### My thoughts on that task:
 
-I learned how to use curl requests for docker-registry and I tested them before I stareted write this code. The issue which I had in Deployment.yaml is missing below variable: :)
+I learned how to use REST API requests for docker-registry and I tested them before I stareted write this code. The issue which I had in Deployment.yaml is missing below variable: :)
 
 curl example:
 ```
