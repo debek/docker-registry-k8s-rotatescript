@@ -1,16 +1,24 @@
+## This is my recruitment repo 2021yr.
+
+### What I did?:
+
+Everything is made from scratch.
+
+Terraform setting up env for EKS K8s in AWS and then we are deploying the application for the internal docker registry. Then I made a python script for image rotation.
+
 ## Syntax:
 
-Everywhere I added numbers in files and directories name because will be easier to read for someone who will check this code.
+Everywhere I added numbers in files and directories' names because will be easier to read for someone who will check this code.
 
 The code is tested and works.
 
 ## How it works:
 
-I used terraform for EKS Deployment. Terraform makes also persistent EBS volume and ingress-nginx, cert-manager, metrics for hpa from the helm.
+I used terraform for EKS Deployment. Terraform makes also persistent EBS volume and ingress-Nginx, cert-manager, metrics for hpa from the helm.
 
-After all yaml apply we have connection in that way: DOMIAN -> LB -> INGRESS (SSL cert-manager) -> Service -> Pods
+After all YAML apply we have a connection in that way: DOMAIN -> LB -> INGRESS (SSL cert-manager) -> Service -> Pods
 
-Garbage-collector starting his job at night.
+Garbage collector starting his job at night.
 
 ## Deployment process:
 
