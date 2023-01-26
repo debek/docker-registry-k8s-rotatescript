@@ -4,7 +4,7 @@
 
 Everything is made from scratch.
 
-Terraform setting up env for EKS K8s in AWS and then we are deploying the application for the internal docker registry. Then I made a python script for image rotation.
+Terraform setting up env for EKS K8s in AWS and then we are deploying the application for the internal docker registry. Then I wrote a python script for image rotation which you can check in this directory `3-retention-registry`.
 
 ## Syntax:
 
